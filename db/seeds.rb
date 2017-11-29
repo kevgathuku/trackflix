@@ -17,11 +17,13 @@ response = HTTParty.get(
   :query => query
 )
 
-response.parsed_response['results'].each { |fetched_show|
+SAVED_SHOW_PROPERTIES = %w( name overview id )
+
+response.parsed_response['results'].each {|fetched_show|
   Show.find_or_create_by(tmdb_id: fetched_show['id']) do |show|
     show.name = fetched_show['name']
     show.overview = fetched_show['overview']
     show.tmdb_id = fetched_show['id']
-    show.tmdb_data = fetched_show
+    show.tmdb_data = fetched_show.reject {|k,v| SAVED_SHOW_PROPERTIES.include?(k)}
   end
 }
