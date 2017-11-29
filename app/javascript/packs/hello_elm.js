@@ -9,6 +9,5 @@ document.addEventListener("DOMContentLoaded", () => {
   const target = document.getElementById("root");
 
   document.body.appendChild(target);
-  Elm.Main.embed(target);
+  Elm.Main.embed(target, gon.all_shows);
 });
-
