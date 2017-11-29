@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  overview: MyText
+  tmdb_id: 1
+  tmdb_data: 
+  season: one
+  number: 1
+
+two:
+  name: MyString
+  overview: MyText
+  tmdb_id: 1
+  tmdb_data: 
+  season: two
+  number: 1
