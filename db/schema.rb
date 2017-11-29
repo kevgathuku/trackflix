@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171129114101) do
+ActiveRecord::Schema.define(version: 20171129115353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "seasons", force: :cascade do |t|
+    t.string "name"
+    t.text "overview"
+    t.integer "tmdb_id"
+    t.json "tmdb_data"
+    t.bigint "show_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_seasons_on_name"
+    t.index ["show_id"], name: "index_seasons_on_show_id"
+    t.index ["tmdb_id"], name: "index_seasons_on_tmdb_id"
+  end
 
   create_table "shows", force: :cascade do |t|
     t.string "name"
@@ -26,4 +39,5 @@ ActiveRecord::Schema.define(version: 20171129114101) do
     t.index ["tmdb_id"], name: "index_shows_on_tmdb_id"
   end
 
+  add_foreign_key "seasons", "shows"
 end
