@@ -47,7 +47,7 @@ init flags =
 showTemplate : Show -> Html Message
 showTemplate show =
     div [ class "fl w-50 w-25-m w-20-l pa2" ]
-        -- TODO: Replace href with show homepage. Fetch individual show data to access it
+        -- TODO: Replace href with show details page. Fetch individual show data to access it
         [ a [ href "https://www.themoviedb.org/?language=en", class "db link dim tc" ]
             [ img [ src ("https://image.tmdb.org/t/p/w342" ++ show.show_poster), alt (show.name ++ " Poster"), class "w-100 db outline black-10" ]
                 []
@@ -65,7 +65,7 @@ view : Model -> Html Message
 view model =
     article []
         [ h2 [ class "f3 fw4 pa3 mv0" ]
-            [ text "Albums" ]
+            [ text "TV Shows" ]
         , div [ class "cf pa2" ]
             (List.map
                 showTemplate
