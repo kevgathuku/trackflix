@@ -2,25 +2,21 @@
 // like app/views/layouts/application.html.erb. All it does is render <div>Hello React</div> at the bottom
 // of the page.
 
-import React from 'react'
-import ReactDOM from 'react-dom'
-import PropTypes from 'prop-types'
+import React from "react";
+import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
 
-const Hello = props => (
-  <div>Hello {props.name}!</div>
-)
+import "tachyons/css/tachyons.min.css";
 
-Hello.defaultProps = {
-  name: 'David'
-}
+import MovieList from "../react-components/MovieList";
 
-Hello.propTypes = {
-  name: PropTypes.string
-}
+let getShows = () => {
+  return window.gon.all_shows;
+};
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   ReactDOM.render(
-    <Hello name="React" />,
-    document.body.appendChild(document.createElement('div')),
-  )
-})
+    <MovieList shows={getShows()} />,
+    document.getElementById("react-root")
+  );
+});
