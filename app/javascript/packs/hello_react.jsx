@@ -15,8 +15,10 @@ let getShows = () => {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  ReactDOM.render(
-    <MovieList shows={getShows()} />,
-    document.getElementById("react-root")
-  );
+  if (document.getElementById("react-root")) {
+    ReactDOM.render(
+      <MovieList shows={getShows()} />,
+      document.getElementById("react-root")
+    );
+  }
 });

@@ -1,5 +1,25 @@
 <%= javascript_pack_tag 'application' %>
 <%= stylesheet_pack_tag 'application' %>
 
-<div id="root" class="sans-serif"></div>
-<div id="react-root" class="sans-serif"></div>
+<h2 class="f3 fw4 pa3 mv0 sans-serif">TV Shows</h2>
+<div class="cf pa2 sans-serif">
+    <% @popular_shows.each do |show| %>
+        <div class="fl w-50 w-25-m w-20-l pa2">
+        <a
+          href="https://www.themoviedb.org/?language=en"
+          class="db link dim tc"
+        >
+          <img
+            src="<%= "https://image.tmdb.org/t/p/w342#{show.show_poster}" %>"
+            class="w-100 db outline black-10"
+          />
+          <dl class="mt2 f6 lh-copy">
+            <dt class="clip">Title</dt>
+            <dd class="ml0 black truncate w-100">
+                <%= show.name %>
+            </dd>
+          </dl>
+        </a>
+      </div>
+    <% end %>
+</div>
