@@ -8,11 +8,13 @@ import "./App.css";
 
 export class App extends Component {
   static propTypes = {
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func,
+    shows: PropTypes.array
   };
 
   componentWillMount() {
-    this.props.dispatch(popularTvShowsFetch());
+    const { dispatch } = this.props;
+    if (dispatch) this.props.dispatch(popularTvShowsFetch());
   }
 
   render() {
@@ -22,13 +24,19 @@ export class App extends Component {
           <h1 className="App-title">Trending TV Shows</h1>
         </header>
         <section>
-          <MovieList />
+          <MovieList shows={this.props.shows} />
         </section>
       </div>
     );
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    shows: state.discoveredShows
+  };
+};
+
 // If the mapDispatchToProps function is not provided,
 // the default implementation just injects dispatch into your component’s props.
-export default connect()(App);
+export default connect(mapStateToProps)(App);

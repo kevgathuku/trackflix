@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 
 import MovieCard from "./MovieCard";
 
@@ -16,10 +15,4 @@ MovieList.propTypes = {
   shows: PropTypes.array.isRequired
 };
 
-const mapStateToProps = state => {
-  return {
-    shows: state.discoveredShows
-  };
-};
-
-export default connect(mapStateToProps)(MovieList);
+export default MovieList;
