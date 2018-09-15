@@ -1,0 +1,29 @@
+{
+  "name": "trackflix",
+  "version": "1.0.0",
+  "description": "Trackflix",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "start:dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevgathuku/trackflix.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kevgathuku/trackflix/issues"
+  },
+  "homepage": "https://github.com/kevgathuku/trackflix#readme",
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "hapi": "^17.5.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
+}
