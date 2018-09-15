@@ -20,8 +20,11 @@
   },
   "homepage": "https://github.com/kevgathuku/trackflix#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "dotenv": "^6.0.0",
-    "hapi": "^17.5.4"
+    "hapi": "^17.5.4",
+    "hapijs-namespace": "^1.0.4",
+    "qs": "^6.5.2"
   },
   "devDependencies": {
     "nodemon": "^1.18.4"

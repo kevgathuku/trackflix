@@ -1,12 +1,25 @@
 const Hapi = require("hapi");
+const namespace = require("hapijs-namespace");
+
+const api = require("./api/shows");
 
 // Create a server with a host and port
 const server = Hapi.server({
   host: "localhost",
-  port: 8000
+  port: process.env.PORT || 8000
 });
 
-// Add the route
+namespace(server, "/api", [
+  {
+    method: "GET",
+    path: "/discover",
+    config: {
+      description: "Discover TV shows",
+      handler: api.discoverTvShows
+    }
+  }
+]);
+
 server.route({
   method: "GET",
   path: "/ping",
