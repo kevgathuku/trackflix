@@ -1,10 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import createSagaMiddleware from "redux-saga";
+import { applyMiddleware, createStore } from "redux";
+import { Provider } from "react-redux";
 
-require('tachyons');
+import "./index.css";
+import App from "./App";
+import appReducer from "./reducer";
+import appSagas from "./sagas";
+import registerServiceWorker from "./registerServiceWorker";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+require("tachyons");
+
+// create the saga middleware
+const sagaMiddleware = createSagaMiddleware();
+
+const store = createStore(appReducer, applyMiddleware(sagaMiddleware));
+
+// Start sagas
+sagaMiddleware.run(appSagas);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
 registerServiceWorker();
