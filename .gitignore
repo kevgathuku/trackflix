@@ -14,7 +14,7 @@
 !/tmp/.keep
 
 /elm-stuff
-/node_modules
+*/node_modules
 /yarn-error.log
 
 .byebug_history

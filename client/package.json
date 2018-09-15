@@ -1,6 +1,7 @@
 {
   "name": "trackflix",
   "version": "0.1.0",
+  "description": "Trackflix React Client",
   "private": true,
   "dependencies": {
     "react": "^16.5.1",
