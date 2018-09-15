@@ -5,7 +5,7 @@ import { ActionTypes, popularTvShowsFetched } from "./actions";
 
 function* fetchPopularTvShows(_action) {
   try {
-    const { results, ...meta} = yield call(api.fetchPopularShows);
+    const { results } = yield call(api.fetchPopularShows);
     yield put(popularTvShowsFetched({ data: results }));
   } catch (e) {
     yield put(popularTvShowsFetched({ error: e }));
