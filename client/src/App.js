@@ -1,9 +1,20 @@
 import React, { Component } from "react";
-import "./App.css";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 import MovieList from "./components/MovieList";
+import { popularTvShowsFetch } from "./actions";
+import "./App.css";
 
-class App extends Component {
+export class App extends Component {
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired
+  };
+
+  componentWillMount() {
+    this.props.dispatch(popularTvShowsFetch());
+  }
+
   render() {
     return (
       <div className="App">
@@ -18,4 +29,6 @@ class App extends Component {
   }
 }
 
-export default App;
+// If the mapDispatchToProps function is not provided,
+// the default implementation just injects dispatch into your component’s props.
+export default connect()(App);

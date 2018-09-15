@@ -6,7 +6,10 @@ const api = require("./api/shows");
 // Create a server with a host and port
 const server = Hapi.server({
   host: "localhost",
-  port: process.env.PORT || 8000
+  port: process.env.PORT || 8000,
+  routes: {
+    cors: true
+  }
 });
 
 namespace(server, "/api", [
