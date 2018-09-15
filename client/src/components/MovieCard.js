@@ -9,7 +9,10 @@ export default class MovieCard extends React.Component {
           className="db link dim tc"
         >
           <img
-            src={`https://image.tmdb.org/t/p/w342${this.props.show.show_poster}`}
+            src={`https://image.tmdb.org/t/p/w342${
+              this.props.show.poster_path
+            }`}
+            alt={this.props.show.name}
             className="w-100 db outline black-10"
           />
           <dl className="mt2 f6 lh-copy">
