@@ -1,2 +1,0 @@
-class Show < ApplicationRecord
-end
