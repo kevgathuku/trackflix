@@ -6,7 +6,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "start:dev": "nodemon server.js"
+    "start:dev": "nodemon server.js",
+    "heroku-postbuild": "cd client && yarn && yarn run build"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
     "dotenv": "^6.0.0",
     "hapi": "^17.5.4",
     "hapijs-namespace": "^1.0.4",
+    "inert": "^5.1.0",
     "qs": "^6.5.2"
   },
   "devDependencies": {

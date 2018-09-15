@@ -1,14 +1,19 @@
+const Path = require("path");
 const Hapi = require("hapi");
 const namespace = require("hapijs-namespace");
+const Inert = require("inert");
 
 const api = require("./api/shows");
 
 // Create a server with a host and port
 const server = Hapi.server({
-  host: "localhost",
+  host: "0.0.0.0",
   port: process.env.PORT || 8000,
   routes: {
-    cors: true
+    cors: true,
+    files: {
+      relativeTo: Path.join(__dirname, "client", "build")
+    }
   }
 });
 
@@ -33,6 +38,20 @@ server.route({
 
 async function start() {
   try {
+    await server.register(Inert);
+
+    server.route({
+      method: "GET",
+      path: "/{param*}",
+      handler: {
+        directory: {
+          path: ".",
+          redirectToSlash: true,
+          index: true
+        }
+      }
+    });
+
     await server.start();
   } catch (err) {
     console.log(err);
