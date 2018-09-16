@@ -1,11 +1,16 @@
 language: node_js
 node_js:
-  - 8
+- 8
 cache:
   directories:
-    - node_modules
+  - client/node_modules
+  - node_modules
 script:
-  - cd client
-  - yarn
-  - npm run build
-  - npm test
+- cd client
+- yarn
+- npm run build
+- npm test
+deploy:
+  provider: heroku
+  api_key:
+    secure: IhED01izOP/83wV0wLNBTBwyT6e144Dv+0eT3atjaQ2KV1G4oA3rma+pc3KzcgohzsuMuYUODBYoE5uFH1pm6qr91N+BIts3sGt5Pp2i4d99iwAj9XO1q7IyWYctoBvJXiOxud/A3UhsWwiW4Eu/0pkC32IIjWYX/QqBSl+/3xhKBUHPD3bw9p7EG57+XYkcuKjLy+Nbfc6RrBjO0gz0oWwhmao3GtPA5ydJlsW8RLBSJ8lpnfCfcL5nfs75J9cyNF0vGNdE1X/PL3si3Xd7JnVBq7gKqABr5RAXY1/A+m7Ip8+60FajaXrkejO2ffl1J1rQ3foHJ7NMAoEy7ohWlvdWjq+95Ip0+jc/sNbCTFZvsHe32z4ox68CYVNcOR23hnEGKdD65rrMnIus4Mjc5Xy+mvvu11ixXmFdlkVDQsl7/VIvdKGPEAkBVrUKvNqKdf4oSOfp+00c96pJgZaRu2gL5IL7zcnLAM+tozZZEl4eTNslwvuGbtFEwHs+ZMFdFpuJV2Fu6eCDPZRPTz70VvnPOkALSEDipT6mqABa4I3X/LW+y4xCUnHDncNp4P1ZYq0T74bWcabYcsZHKL6fZza08jHQlu9gRK/vBOH9ABnnd04ILr4nS71K7ktCEPdHah7+swH04u2qIhb2ScZxYsTGWtGj8MbZH5MlYHJ1Fy4=
