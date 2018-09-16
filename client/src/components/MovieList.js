@@ -1,18 +1,19 @@
-import React from "react";
-import PropTypes from "prop-types";
+// @flow
+import * as React from "react";
 
 import MovieCard from "./MovieCard";
+import type { ShowProps } from "../types";
 
-const MovieList = ({ shows }) => (
+type Props = {
+  shows: Array<ShowProps>
+};
+
+const MovieList = ({ shows }: Props) => (
   <div className="cf pa2">
     {(shows || []).map(show => (
       <MovieCard show={show} key={show.id} />
     ))}
   </div>
 );
-
-MovieList.propTypes = {
-  shows: PropTypes.array.isRequired
-};
 
 export default MovieList;
