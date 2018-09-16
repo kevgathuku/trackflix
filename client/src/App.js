@@ -13,7 +13,7 @@ type Props = {
 };
 
 export class App extends React.Component<Props> {
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchTvShows();
   }
 
@@ -37,7 +37,7 @@ const mapStateToProps = state => {
   };
 };
 
-type Dispatch = (action: Action ) => any;
+type Dispatch = (action: Action) => any;
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   fetchTvShows: () => dispatch(popularTvShowsFetch())
