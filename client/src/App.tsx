@@ -1,20 +1,21 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 import { connect } from "react-redux";
+import { Dispatch } from "redux";
 
+import { ShowProps } from "./types";
+import { AppState } from "./reducer";
 import MovieList from "./components/MovieList";
 import { popularTvShowsFetch } from "./actions";
 import "./App.css";
 
-export class App extends Component {
-  static propTypes = {
-    dispatch: PropTypes.func,
-    shows: PropTypes.array
-  };
+type AppProps = {
+  fetchTvShows: Function;
+  shows: Array<ShowProps>;
+};
 
+export class App extends React.Component<AppProps> {
   componentWillMount() {
-    const { dispatch } = this.props;
-    if (dispatch) this.props.dispatch(popularTvShowsFetch());
+    this.props.fetchTvShows();
   }
 
   render() {
@@ -31,12 +32,19 @@ export class App extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: AppState) => {
   return {
     shows: state.discoveredShows
   };
 };
 
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  fetchTvShows: () => dispatch(popularTvShowsFetch())
+});
+
 // If the mapDispatchToProps function is not provided,
 // the default implementation just injects dispatch into your component’s props.
-export default connect(mapStateToProps)(App);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

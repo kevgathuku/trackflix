@@ -3,7 +3,7 @@ import { takeLatest, call, put } from "redux-saga/effects";
 import * as api from "./api";
 import { ActionTypes, popularTvShowsFetched } from "./actions";
 
-function* fetchPopularTvShows(_action) {
+function* fetchPopularTvShows() {
   try {
     const { results } = yield call(api.fetchPopularShows);
     yield put(popularTvShowsFetched({ data: results }));
@@ -17,6 +17,8 @@ function* fetchPopularTvShows(_action) {
   If the same action gets dispatched while a fetch is already pending,
   that pending fetch is cancelled and only the latest one will be run.
 */
-export default function* appSagas() {
+function* appSagas() {
   yield takeLatest(ActionTypes.TV_SHOWS_FETCH, fetchPopularTvShows);
 }
+
+export default appSagas;

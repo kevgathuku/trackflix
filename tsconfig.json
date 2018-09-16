@@ -12,5 +12,9 @@
     "experimentalDecorators": true,
     "strictNullChecks": true,
     "sourceMap": true
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "./client"
+  ]
 }
