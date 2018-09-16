@@ -1,5 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 import createSagaMiddleware from "redux-saga";
 import { applyMiddleware, createStore } from "redux";
 import { Provider } from "react-redux";
@@ -24,6 +24,6 @@ ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById("root")
+  document.getElementById("root") as HTMLElement
 );
 registerServiceWorker();

@@ -1,6 +1,8 @@
-import React from "react";
+import * as React from "react";
 
-export default class MovieCard extends React.Component {
+import { MovieCardProps } from "../types";
+
+export default class MovieCard extends React.Component<MovieCardProps> {
   render() {
     return (
       <div className="fl w-50 w-25-m w-20-l pa2">

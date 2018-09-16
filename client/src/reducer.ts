@@ -1,12 +1,21 @@
-import { ActionTypes } from "./actions";
+import { Reducer } from 'redux'
 
-const initialState = {
+import { ActionTypes } from "./actions";
+import { ShowProps } from "./types";
+
+export interface AppState {
+  loading: boolean;
+  error?: string;
+  discoveredShows: Array<ShowProps>;
+}
+
+const initialState: AppState = {
   loading: false,
-  error: null,
+  error: undefined,
   discoveredShows: []
 };
 
-export default (state = initialState, action) => {
+const reducer: Reducer<AppState> = (state = initialState, action) => {
   const { data, error = null } = action;
   switch (action.type) {
     case ActionTypes.TV_SHOWS_FETCH:
@@ -22,3 +31,5 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+
+export default reducer;
