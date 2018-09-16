@@ -9,6 +9,7 @@ script:
 - cd client
 - yarn
 - npm run build
+- yarn flow
 - npm test
 deploy:
   provider: heroku
