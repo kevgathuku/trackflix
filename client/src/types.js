@@ -5,3 +5,7 @@ export type ShowProps = {
   name: string,
   id: number
 };
+
+export type Action = {
+  type: string
+};

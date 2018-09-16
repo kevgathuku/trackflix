@@ -1,13 +1,20 @@
 import { ActionTypes } from "./actions";
 
-const initialState = {
+type State = {
+  +loading: boolean,
+  +error?: string,
+  +discoveredShows: Array<ShowProps>
+};
+
+const initialState: State = {
   loading: false,
   error: null,
   discoveredShows: []
 };
 
-export default (state = initialState, action) => {
+const reducer = (state = initialState, action): State => {
   const { data, error = null } = action;
+
   switch (action.type) {
     case ActionTypes.TV_SHOWS_FETCH:
       return Object.assign({}, state, {
@@ -22,3 +29,5 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+
+export default reducer;
