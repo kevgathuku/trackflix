@@ -23,9 +23,22 @@
     "flow": "flow"
   },
   "devDependencies": {
+    "deep-freeze": "^0.0.1",
     "enzyme": "^3.6.0",
     "enzyme-adapter-react-16": "^1.5.0",
     "enzyme-to-json": "^3.3.4",
     "flow-typed": "^2.5.1"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/coverage/**",
+      "!**/flow-typed/**"
+    ],
+    "coverageReporters": [
+      "lcov",
+      "html"
+    ]
   }
 }

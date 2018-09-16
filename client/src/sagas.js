@@ -1,17 +1,16 @@
 // @flow
 import { takeLatest, call, put } from "redux-saga/effects";
-import type { Action } from "./types";
 import type { Saga } from "redux-saga";
 
 import * as api from "./api";
 import { ActionTypes, popularTvShowsFetched } from "./actions";
 
-function* fetchPopularTvShows(action: Action): Saga<void> {
+function* fetchPopularTvShows(): Saga<void> {
   try {
     const { results } = yield call(api.fetchPopularShows);
-    yield put(popularTvShowsFetched({ data: results }));
+    yield put(popularTvShowsFetched({ data: results, error: "" }));
   } catch (e) {
-    yield put(popularTvShowsFetched({ error: e }));
+    yield put(popularTvShowsFetched({ data: [], error: e }));
   }
 }
 

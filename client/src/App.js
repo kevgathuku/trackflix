@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import type { Action, ShowProps } from "./types";
 import MovieList from "./components/MovieList";
-import { popularTvShowsFetch } from "./actions";
+import { tvShowsFetchAction } from "./actions";
 import "./App.css";
 
 type Props = {
@@ -40,7 +40,7 @@ const mapStateToProps = state => {
 type Dispatch = (action: Action) => any;
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  fetchTvShows: () => dispatch(popularTvShowsFetch())
+  fetchTvShows: () => dispatch(tvShowsFetchAction)
 });
 
 // If the mapDispatchToProps function is not provided,
