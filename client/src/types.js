@@ -6,6 +6,17 @@ export type ShowProps = {
   id: number
 };
 
-export type Action = {
-  type: string
+export type TvShowResponseType = { data: ShowProps[], error: string };
+
+// Actions
+type TvShowsFetchAction = {
+  +type: string,
+  payload?: TvShowResponseType
 };
+
+export type TvShowsFetchedAction = {
+  +type: string,
+  payload: TvShowResponseType
+};
+
+export type Action = TvShowsFetchAction | TvShowsFetchedAction;

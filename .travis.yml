@@ -8,9 +8,9 @@ cache:
 script:
 - cd client
 - yarn
-- npm run build
+- yarn run build
 - yarn flow
-- npm test
+- yarn test --coverage
 deploy:
   provider: heroku
   api_key:

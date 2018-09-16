@@ -1,29 +1,38 @@
 import { ActionTypes } from "./actions";
+import type { Action, ShowProps } from "./types";
 
-type State = {
+export type State = {
   +loading: boolean,
-  +error?: string,
-  +discoveredShows: Array<ShowProps>
+  +tvShowsResponse: {
+    error: string,
+    data: Array<ShowProps>
+  }
 };
 
 const initialState: State = {
   loading: false,
-  error: null,
-  discoveredShows: []
+  tvShowsResponse: {
+    error: "",
+    data: []
+  }
 };
 
-const reducer = (state = initialState, action): State => {
-  const { data, error = null } = action;
-
+const reducer = (state: State = initialState, action: Action): State => {
   switch (action.type) {
     case ActionTypes.TV_SHOWS_FETCH:
       return Object.assign({}, state, {
         loading: true
       });
     case ActionTypes.TV_SHOWS_FETCHED:
+      const {
+        payload: { error = '', data= [] }
+      } = action;
       return Object.assign({}, state, {
-        discoveredShows: data,
-        error
+        loading: false,
+        tvShowsResponse: {
+          error,
+          data
+        }
       });
     default:
       return state;
