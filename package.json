@@ -26,7 +26,8 @@
     "hapi": "^17.5.4",
     "hapijs-namespace": "^1.0.4",
     "inert": "^5.1.0",
-    "qs": "^6.5.2"
+    "qs": "^6.5.2",
+    "trakt.tv": "^7.0.0"
   },
   "devDependencies": {
     "@types/node": "^10.9.4",
