@@ -33,7 +33,7 @@ export class App extends React.Component<Props> {
 
 const mapStateToProps = state => {
   return {
-    shows: state.discoveredShows
+    shows: state.tvShowsResponse.data
   };
 };
 
