@@ -1,5 +1,7 @@
 ## Trackflix
 
+[![Build Status](https://travis-ci.org/kevgathuku/trackflix.svg?branch=master)](https://travis-ci.org/kevgathuku/trackflix)
+
 ### Project Setup
 
 - Clone the repo  and navigate to the newly created folder
@@ -19,6 +21,10 @@ cd trackflix
 
   This is required to get info from the The Movie DB's API.   
   You can find out more about how to get an API key at [The Movie DB FAQ](https://www.themoviedb.org/faq/api)
+
+- Add a valid Client ID and Client Secret from the [Trakt.tv API](https://trakt.docs.apiary.io/#introduction/create-an-app) in the `.env` file
+
+- Add the correct redirect URI in the `.env` file. This is the URL the Trakt.tv API redirects to once a user is authenticated.
 
 - Install the dependencies:
   - Using `npm`:
@@ -45,7 +51,7 @@ To start the client, run these commands:
     npm run start
 ```
   The client runs on `http://localhost:3000`
-  
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 You can find the most recent version of the Create React App guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).

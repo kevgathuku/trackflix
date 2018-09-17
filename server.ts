@@ -25,6 +25,22 @@ namespace(server, "/api", [
       description: "Discover TV shows",
       handler: api.discoverTvShows
     }
+  },
+  {
+    method: "GET",
+    path: "/auth",
+    config: {
+      description: "Authenticate with Trakt",
+      handler: api.traktAuth
+    }
+  },
+  {
+    method: "GET",
+    path: "/redirect",
+    config: {
+      description: "Handle Trakt Redirect",
+      handler: api.traktRedirect
+    }
   }
 ]);
 
