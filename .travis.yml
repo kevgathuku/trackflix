@@ -5,12 +5,16 @@ cache:
   directories:
   - client/node_modules
   - node_modules
-script:
+script: # JS client tests
 - cd client
 - yarn
 - yarn run build
 - yarn flow
 - yarn test --coverage
+# Elm tests
+- cd ../elmstreet
+- npm i create-elm-app -g
+- elm-app test
 deploy:
   provider: heroku
   api_key:
