@@ -4,60 +4,53 @@ import Browser
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
+import Http exposing (..)
+import HttpBuilder exposing (..)
+import Json.Decode as Decode exposing (Decoder, int, list, string)
+import Json.Decode.Pipeline exposing (required)
+import Url.Builder as Url
+
+
+
+---- PROGRAM ----
+
+
+main : Program () Model Msg
+main =
+    Browser.document
+        { view = view
+        , init = \_ -> init
+        , update = update
+        , subscriptions = always Sub.none
+        }
 
 
 
 ---- MODEL ----
--- Seed data
-
-
-seedShows : List Show
-seedShows =
-    [ Show "The Big Bang Theory" 1418 "/ooBGRQBdbGzBxAVfExiO8r7kloA.jpg"
-    , Show "American Horror Story" 1413 "/7htwyZzjIUFIIkGQ6HhMgv2kVmM.jpg"
-    , Show "Marvel's Iron Fist" 62127 "/nv4nLXbDhcISPP8C1mgaxKU50KO.jpg"
-    , Show "Shameless" 34307 "/iRyQTp2L437k6zfFCvZSOWaxQFA.jpg"
-    , Show "Law & Order: Special Victims Unit" 2734 "/yzMQBlirydvKp4Zgr5FbXlsrRmw.jpg"
-    , Show "The Simpsons" 456 "/yTZQkSsxUFJZJe67IenRM0AEklc.jpg"
-    , Show "The Walking Dead" 1402 "/yn7psGTZsHumHOkLUmYpyrIcA2G.jpg"
-    , Show "Game of Thrones" 1399 "/gwPSoYUHAKmdyVywgLpKKA4BjRr.jpg"
-    , Show "Friends" 1668 "/7buCWBTpiPrCF5Lt023dSC60rgS.jpg"
-    , Show "Doctor Who" 57243 "/3EcYZhBMAvVw4czcDLg9Sd0FuzQ.jpg"
-    , Show "Better Call Saul" 60059 "/zjg4jpK1Wp2kiRvtt5ND0kznako.jpg"
-    , Show "Supernatural" 1622 "/pui1V389cQft0BVFu9pbsYLEW1Q.jpg"
-    , Show "American Vandal" 73126 "/pZH8L0gMjeHJMT29mTXWn7mEliR.jpg"
-    , Show "Family Guy" 1434 "/gBGUL1UTUNmdRQT8gA1LUV4yg39.jpg"
-    , Show "The Flash" 60735 "/lUFK7ElGCk9kVEryDJHICeNdmd1.jpg"
-    , Show "BoJack Horseman" 61222 "/1bnrSsJNejoQq8lGBDECQroGjPz.jpg"
-    , Show "Grey's Anatomy" 1416 "/mgOZSS2FFIGtfVeac1buBw3Cx5w.jpg"
-    , Show "NCIS" 4614 "/1ubAPydzsb9VzhqeUGGDA7DZCUy.jpg"
-    , Show "Marvel's Agents of S.H.I.E.L.D." 1403 "/xjm6uVktPuKXNILwjLXwVG5d5BU.jpg"
-    , Show "Suits" 37680 "/nVz7cZZ59PsCLgiWFC0M0N6AFC3.jpg"
-    ]
 
 
 type alias ErrorMessage =
     String
 
 
-type alias Show =
-    { name : String
-    , id : Int
-    , posterPath : String
+type alias Model =
+    { loading : Bool
+    , popularShows : ShowsResponse
     }
-
-
-type alias Shows =
-    List Show
 
 
 type alias ShowsResponse =
     Result ErrorMessage Shows
 
 
-type alias Model =
-    { loading : Bool
-    , popularShows : ShowsResponse
+type alias Shows =
+    List Show
+
+
+type alias Show =
+    { name : String
+    , id : Int
+    , posterPath : String
     }
 
 
@@ -73,13 +66,67 @@ init =
 
 
 
+---- HTTP ----
+
+
+hostURL =
+    "http://localhost:8000"
+
+
+discoverURL =
+    Url.crossOrigin hostURL
+        [ "api", "discover" ]
+        []
+
+
+showDecoder : Decoder Show
+showDecoder =
+    Decode.succeed Show
+        |> required "name" string
+        |> required "id" int
+        |> required "poster_path" string
+
+
+showsDecoder : Decoder (List Show)
+showsDecoder =
+    Decode.field "data" (Decode.field "results" (list showDecoder))
+
+
+getPopularShows : Cmd Msg
+getPopularShows =
+    Http.send LoadedShows (Http.get discoverURL showsDecoder)
+
+
+httpErrorToString : Http.Error -> String
+httpErrorToString error =
+    case error of
+        BadUrl text ->
+            "Bad Url: " ++ text
+
+        Timeout ->
+            "Http Timeout"
+
+        NetworkError ->
+            "Network Error"
+
+        BadStatus response ->
+            "Bad Http Status: " ++ String.fromInt response.status.code
+
+        BadPayload message response ->
+            "Bad Http Payload: "
+                ++ message
+                ++ " ("
+                ++ String.fromInt response.status.code
+                ++ ")"
+
+
+
 ---- UPDATE ----
 
 
 type Msg
     = FetchShows
-    | LoadShows Shows
-    | SetError ErrorMessage
+    | LoadedShows (Result Http.Error Shows)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -90,21 +137,17 @@ update msg model =
                 updatedModel =
                     { model | loading = True }
             in
-            ( updatedModel, Cmd.none )
+            ( updatedModel, getPopularShows )
 
-        LoadShows shows ->
-            let
-                updatedModel =
-                    { model | popularShows = Result.Ok shows }
-            in
-            ( updatedModel, Cmd.none )
+        LoadedShows result ->
+            case result of
+                Ok shows ->
+                    ( { model | popularShows = Result.Ok shows }
+                    , Cmd.none
+                    )
 
-        SetError errorMsg ->
-            let
-                updatedModel =
-                    { model | popularShows = Result.Err errorMsg }
-            in
-            ( updatedModel, Cmd.none )
+                Err errorMsg ->
+                    ( { model | popularShows = errorMsg |> httpErrorToString |> Result.Err }, Cmd.none )
 
 
 
@@ -116,7 +159,7 @@ view model =
     { title = "Trackflix"
     , body =
         [ div [ class "App" ]
-            [ header [ class "App-header" ]
+            [ Html.header [ class "App-header" ]
                 [ h1 [ class "App-title" ] [ text "Trending TV Shows" ]
                 ]
             , section [] [ movieList model.popularShows ]
@@ -133,7 +176,7 @@ movieList response =
         Result.Ok shows ->
             div [ class "cf pa2" ]
                 (if List.length shows == 0 then
-                    [ button [ onClick (LoadShows seedShows) ] [ text "Load shows" ] ]
+                    [ button [ onClick FetchShows ] [ text "Load shows" ] ]
 
                  else
                     List.map showTemplate shows
@@ -154,17 +197,3 @@ showTemplate show =
                 ]
             ]
         ]
-
-
-
----- PROGRAM ----
-
-
-main : Program () Model Msg
-main =
-    Browser.document
-        { view = view
-        , init = \_ -> init
-        , update = update
-        , subscriptions = always Sub.none
-        }
