@@ -1,0 +1,11 @@
+{
+  "name": "elmstreet",
+  "version": "1.0.0",
+  "description": "This project is bootstrapped with [Create Elm App](https://github.com/halfzebra/create-elm-app).",
+  "scripts": {
+    "build": "elm-app build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}

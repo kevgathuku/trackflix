@@ -7,7 +7,7 @@
   "scripts": {
     "start": "tsc-watch --onSuccess \"ts-node server.ts \"",
     "start:dev": "nodemon",
-    "heroku-postbuild": "cd client && yarn && yarn run build"
+    "heroku-postbuild": "cd elmstreet && yarn global add create-elm-app && yarn run build"
   },
   "repository": {
     "type": "git",
