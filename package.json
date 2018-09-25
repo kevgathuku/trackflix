@@ -5,8 +5,9 @@
   "private": true,
   "main": "server.js",
   "scripts": {
-    "start": "tsc-watch --onSuccess \"ts-node server.ts \"",
-    "start:dev": "nodemon",
+    "start": "ts-node server.ts",
+    "start:dev": "tsc-watch --onSuccess \"ts-node server.ts \"",
+    "nodemon": "nodemon",
     "heroku-postbuild": "cd elmstreet && yarn global add create-elm-app && yarn run build"
   },
   "repository": {
@@ -27,14 +28,14 @@
     "hapijs-namespace": "^1.0.4",
     "inert": "^5.1.0",
     "qs": "^6.5.2",
-    "trakt.tv": "^7.0.0"
+    "ts-node": "^7.0.1",
+    "trakt.tv": "^7.0.0",
+    "typescript": "^3.0.3"
   },
   "devDependencies": {
     "@types/node": "^10.9.4",
     "@types/qs": "^6.5.1",
     "nodemon": "^1.18.4",
-    "ts-node": "^7.0.1",
-    "tsc-watch": "^1.0.27",
-    "typescript": "^3.0.3"
+    "tsc-watch": "^1.0.27"
   }
 }
