@@ -5,7 +5,7 @@ cache:
   directories:
   - node_modules
 script:
-- cd client && npm run test
+- cd client && yarn && npm run test
 deploy:
   provider: heroku
   api_key:
