@@ -1,18 +1,11 @@
-// @flow
 import React from "react";
 import { connect } from "react-redux";
 
-import type { Action, ShowProps } from "./types";
 import MovieList from "./components/MovieList";
 import { tvShowsFetchAction } from "./actions";
 import "./App.css";
 
-type Props = {
-  fetchTvShows: Function,
-  shows: Array<ShowProps>
-};
-
-export class App extends React.Component<Props> {
+export class App extends React.Component {
   componentDidMount() {
     this.props.fetchTvShows();
   }
@@ -37,9 +30,7 @@ const mapStateToProps = state => {
   };
 };
 
-type Dispatch = (action: Action) => any;
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   fetchTvShows: () => dispatch(tvShowsFetchAction)
 });
 

@@ -1,13 +1,6 @@
-// @flow
-import * as React from "react";
+import React from "react";
 
-import type { ShowProps } from "../types";
-
-type Props = {
-  show: ShowProps
-};
-
-export default class MovieCard extends React.Component<Props> {
+export default class MovieCard extends React.Component {
   render() {
     return (
       <div className="fl w-50 w-25-m w-20-l pa2">

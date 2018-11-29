@@ -1,4 +1,3 @@
-// @flow
 const axios = require("axios");
 
 let BASE_URL;

@@ -1,14 +1,8 @@
-// @flow
-import * as React from "react";
+import React from "react";
 
 import MovieCard from "./MovieCard";
-import type { ShowProps } from "../types";
 
-type Props = {
-  shows: Array<ShowProps>
-};
-
-const MovieList = ({ shows }: Props) => (
+const MovieList = ({ shows }) => (
   <div className="cf pa2">
     {(shows || []).map(show => (
       <MovieCard show={show} key={show.id} />
