@@ -1,11 +1,10 @@
 {
   "ignore": [
     "client/",
-    "**/*.test.ts",
-    "**/*.spec.ts",
+    "**/*.test.js",
+    "**/*.spec.js",
     ".git",
-    "node_modules"
+    "node_modules/**/node_modules"
   ],
-  "exec": "npm run start:dev",
-  "ext": "ts"
+  "ext": "js"
 }

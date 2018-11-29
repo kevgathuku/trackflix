@@ -5,9 +5,8 @@
   "private": true,
   "main": "server.js",
   "scripts": {
-    "start": "ts-node server.ts",
-    "start:dev": "tsc-watch --onSuccess \"ts-node server.ts \"",
-    "nodemon": "nodemon",
+    "start": "npm run build && node dist/index.js",
+    "start:dev": "nodemon server.js",
     "heroku-postbuild": "cd client && yarn && yarn run build"
   },
   "repository": {
@@ -28,14 +27,9 @@
     "hapijs-namespace": "^1.0.4",
     "inert": "^5.1.0",
     "qs": "^6.5.2",
-    "ts-node": "^7.0.1",
-    "trakt.tv": "^7.0.0",
-    "typescript": "^3.0.3"
+    "trakt.tv": "^7.0.0"
   },
   "devDependencies": {
-    "@types/node": "^10.9.4",
-    "@types/qs": "^6.5.1",
-    "nodemon": "^1.18.4",
-    "tsc-watch": "^1.0.27"
+    "nodemon": "^1.18.4"
   }
 }

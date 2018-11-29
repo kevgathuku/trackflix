@@ -1,7 +1,7 @@
-import axios from "axios";
-import * as qs from "qs";
+const axios = require("axios");
+const qs = require("qs");
 
-import { trakt } from "./trakt";
+const trakt = require("./trakt").trakt;
 
 require("dotenv").config();
 
@@ -11,7 +11,7 @@ const requiredParams = qs.stringify({
   api_key: process.env.TMDB_API_KEY
 });
 
-export const discoverTvShows = () => {
+const discoverTvShows = () => {
   return axios
     .get(`${BASE_API_URL}/discover/tv?${requiredParams}`)
     .then(response => {
@@ -24,11 +24,11 @@ export const discoverTvShows = () => {
     });
 };
 
-export const traktAuth = () => {
+const traktAuth = () => {
   return { authURL: trakt.get_url() };
 };
 
-export const traktRedirect = request => {
+const traktRedirect = request => {
   const { code, state } = request.query;
   console.log("code", code);
   console.log("state", state);
@@ -55,4 +55,10 @@ export const traktRedirect = request => {
       console.error(error);
       return { error };
     });
+};
+
+module.exports = {
+  discoverTvShows,
+  traktAuth,
+  traktRedirect,
 };

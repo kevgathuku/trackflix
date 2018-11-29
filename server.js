@@ -1,5 +1,5 @@
 const Path = require("path");
-import * as Hapi from "hapi";
+const Hapi = require("hapi");
 const namespace = require("hapijs-namespace");
 const Inert = require("inert");
 

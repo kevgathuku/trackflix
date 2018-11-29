@@ -12,4 +12,8 @@ const options = {
   debug: true
 };
 
-export const trakt = new Trakt(options);
+const trakt = new Trakt(options);
+
+module.exports = {
+  trakt,
+}
