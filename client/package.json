@@ -8,10 +8,10 @@
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
     "react-redux": "^5.0.7",
-    "react-scripts": "1.1.5",
+    "react-scripts": "2.1.1",
     "redux": "^4.0.0",
     "redux-saga": "^0.16.0",
-    "tachyons": "4.10.0"
+    "tachyons": "^4.10.0"
   },
   "proxy": "http://localhost:8000",
   "scripts": {
@@ -36,5 +36,11 @@
       "lcov",
       "html"
     ]
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
