@@ -8,7 +8,7 @@
     "start": "ts-node server.ts",
     "start:dev": "tsc-watch --onSuccess \"ts-node server.ts \"",
     "nodemon": "nodemon",
-    "heroku-postbuild": "cd client && yarn run build"
+    "heroku-postbuild": "cd client && yarn && yarn run build"
   },
   "repository": {
     "type": "git",

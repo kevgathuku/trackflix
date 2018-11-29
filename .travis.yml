@@ -6,7 +6,8 @@ cache:
   directories:
   - node_modules
 script:
-- cd client && yarn && npm run test
+- cd client && yarn && yarn run test
+- cd ..
 notifications:
   email:
     on_success: change
